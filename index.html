@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Encoder</title>
+</head>
+<body>
+    <h1>Link Encoder</h1>
+    <form id="linkForm">
+        <label for="linkInput">Enter a link to encode:</label><br>
+        <input type="text" id="linkInput" name="linkInput"><br><br>
+        <button type="button" onclick="encodeAndCopyLink()">Encode and Copy Link</button>
+    </form>
+    <p id="encodedLink"></p>
+
+    <script>
+        function encodeAndCopyLink() {
+            var link = document.getElementById('linkInput').value;
+            var encodedLink = encodeURIComponent(link);
+            document.getElementById('encodedLink').innerText = "Encoded Link: " + encodedLink;
+            
+            // Copy the encoded link to clipboard
+            navigator.clipboard.writeText(encodedLink).then(function() {
+                alert('Encoded link copied to clipboard!');
+            }, function(err) {
+                console.error('Could not copy text: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
