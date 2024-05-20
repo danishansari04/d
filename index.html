@@ -4,15 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Link Encoder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            width: 300px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 16px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        p {
+            font-size: 14px;
+            color: #333;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #155724;
+            background-color: #d4edda;
+            padding: 10px;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>Link Encoder</h1>
-    <form id="linkForm">
-        <label for="linkInput">Enter a link to encode:</label><br>
-        <input type="text" id="linkInput" name="linkInput"><br><br>
-        <button type="button" onclick="encodeAndCopyLink()">Encode and Copy Link</button>
-    </form>
-    <p id="encodedLink"></p>
+    <div class="container">
+        <h1>Link Encoder</h1>
+        <form id="linkForm">
+            <label for="linkInput">Enter a link to encode:</label><br>
+            <input type="text" id="linkInput" name="linkInput"><br><br>
+            <button type="button" onclick="encodeAndCopyLink()">Encode and Copy Link</button>
+        </form>
+        <p id="encodedLink"></p>
+        <div class="message" id="copyMessage">Encoded link copied to clipboard!</div>
+    </div>
 
     <script>
         function encodeAndCopyLink() {
@@ -22,7 +86,11 @@
             
             // Copy the encoded link to clipboard
             navigator.clipboard.writeText(encodedLink).then(function() {
-                alert('Encoded link copied to clipboard!');
+                var copyMessage = document.getElementById('copyMessage');
+                copyMessage.style.display = 'block';
+                setTimeout(function() {
+                    copyMessage.style.display = 'none';
+                }, 3000);
             }, function(err) {
                 console.error('Could not copy text: ', err);
             });
